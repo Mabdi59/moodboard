@@ -1,0 +1,44 @@
+/* src/components/MoodStats/MoodFilter.module.css */
+
+.filterForm {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.group label {
+  margin-bottom: 0.25rem;
+  color: #444;
+}
+
+.group select,
+.group input {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button {
+  background-color: #4f46e5;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #4338ca;
+}

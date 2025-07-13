@@ -10,10 +10,17 @@ public class User {
 
    private int id;
    private String username;
+   private String email;
+
    @JsonIgnore
    private String password;
+
    @JsonIgnore
    private boolean activated;
+
+   private String createdAt;
+   private String updatedAt;
+
    private Set<Authority> authorities = new HashSet<>();
 
    public User() { }
@@ -42,6 +49,14 @@ public class User {
       this.username = username;
    }
 
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
    public String getPassword() {
       return password;
    }
@@ -56,6 +71,22 @@ public class User {
 
    public void setActivated(boolean activated) {
       this.activated = activated;
+   }
+
+   public String getCreatedAt() {
+      return createdAt;
+   }
+
+   public void setCreatedAt(String createdAt) {
+      this.createdAt = createdAt;
+   }
+
+   public String getUpdatedAt() {
+      return updatedAt;
+   }
+
+   public void setUpdatedAt(String updatedAt) {
+      this.updatedAt = updatedAt;
    }
 
    public Set<Authority> getAuthorities() {
@@ -82,13 +113,16 @@ public class User {
       return id == user.id &&
               activated == user.activated &&
               Objects.equals(username, user.username) &&
+              Objects.equals(email, user.email) &&
               Objects.equals(password, user.password) &&
-              Objects.equals(authorities, user.authorities);
+              Objects.equals(authorities, user.authorities) &&
+              Objects.equals(createdAt, user.createdAt) &&
+              Objects.equals(updatedAt, user.updatedAt);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, username, password, activated, authorities);
+      return Objects.hash(id, username, email, password, activated, authorities, createdAt, updatedAt);
    }
 
    @Override
@@ -96,7 +130,10 @@ public class User {
       return "User{" +
               "id=" + id +
               ", username='" + username + '\'' +
+              ", email='" + email + '\'' +
               ", activated=" + activated +
+              ", createdAt='" + createdAt + '\'' +
+              ", updatedAt='" + updatedAt + '\'' +
               ", authorities=" + authorities +
               '}';
    }

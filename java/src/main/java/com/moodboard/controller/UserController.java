@@ -9,57 +9,55 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The UserController is a class for handling HTTP Requests related to getting User information.
- *
- * It depends on an instance of a UserDAO for retrieving and storing data. This is provided
- * through dependency injection.
- *
- * Note: This class does not handle authentication (registration/login) of Users. That is
- * handled separately in the AuthenticationController.
- */
 @RestController
+@RequestMapping("/users")
 @CrossOrigin
 @PreAuthorize("isAuthenticated()")
-@RequestMapping( path = "/users")
 public class UserController {
 
-    private UserDao userDao;
+    private final UserDao userDao;
 
     public UserController(UserDao userDao) {
         this.userDao = userDao;
     }
 
+    /**
+     * Admin-only: Get a list of all users.
+     */
+    @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(method = RequestMethod.GET)
     public List<User> getAllUsers() {
-        List<User> users = new ArrayList<>();
-
         try {
-            users = userDao.getUsers();
+            return userDao.getUsers();
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to fetch users.", e);
         }
-        catch (DaoException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-        }
-
-        return users;
     }
 
-    @RequestMapping(path = "/{userId}", method = RequestMethod.GET)
-    public User getById(@PathVariable int userId, Principal principal) {
-        User user = null;
-
+    /**
+     * Authenticated user: Get profile by ID (admin or self).
+     */
+    @GetMapping("/{userId}")
+    public User getUserById(@PathVariable int userId, Principal principal) {
         try {
-            user = userDao.getUserById(userId);
-        }
-        catch (DaoException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-        }
+            User requester = userDao.getUserByUsername(principal.getName());
+            User targetUser = userDao.getUserById(userId);
 
-        return user;
+            if (requester == null || targetUser == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found.");
+            }
+
+            // Optional: only allow self or admin
+            if (!requester.getUsername().equals(targetUser.getUsername())
+                    && requester.getAuthorities().stream().noneMatch(a -> a.getName().equals("ROLE_ADMIN"))) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access denied.");
+            }
+
+            return targetUser;
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error fetching user.", e);
+        }
     }
-
 }

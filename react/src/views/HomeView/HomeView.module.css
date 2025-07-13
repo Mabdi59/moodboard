@@ -1,0 +1,70 @@
+/* src/views/HomeView/HomeView.module.css */
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 120px); /* subtracts header/footer height */
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.subtext {
+  font-size: 1.15rem;
+  color: var(--color-muted);
+  margin-bottom: 2rem;
+}
+
+.newEntryButton {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  margin-bottom: 2rem;
+}
+
+.newEntryButton:hover {
+  background-color: #574fd6;
+}
+
+.statsCard {
+  background-color: #f9fbff;
+  border: 1px solid #e3e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.statsCard h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.statsCard p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.emptyState {
+  color: var(--color-muted);
+  font-style: italic;
+}

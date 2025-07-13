@@ -10,37 +10,35 @@ export default function RegisterView() {
 
   const [notification, setNotification] = useState(null);
 
-  // Setup state for the registration data
+  // State for registration data
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   function handleSubmit(event) {
     event.preventDefault();
 
-
-    // Validate the form data
     if (password !== confirmPassword) {
-      // Passwords don't match, so display error notification
       setNotification({ type: 'error', message: 'Passwords do not match.' });
-    } else {
-      // If no errors, send data to server
-      AuthService.register({
-        username,
-        password,
-        confirmPassword,
-        role: 'user',
-      })
-        .then(() => {
-          setNotification({ type: 'success', message: 'Registration successful' });
-          navigate('/login');
-        })
-        .catch((error) => {
-          // Check for a response message, but display a default if that doesn't exist
-          const message = error.response?.data?.message || 'Registration failed.';
-          setNotification({ type: 'error', message: message });
-        });
+      return;
     }
+
+    AuthService.register({
+      username,
+      email,
+      password,
+      confirmPassword,
+      role: 'user',
+    })
+      .then(() => {
+        setNotification({ type: 'success', message: 'Registration successful' });
+        navigate('/login');
+      })
+      .catch((error) => {
+        const message = error.response?.data?.message || 'Registration failed.';
+        setNotification({ type: 'error', message });
+      });
   }
 
   return (
@@ -58,9 +56,21 @@ export default function RegisterView() {
             value={username}
             size="50"
             required
-            autoFocus
             autoComplete="username"
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            size="50"
+            required
+            autoComplete="email"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -72,7 +82,7 @@ export default function RegisterView() {
             value={password}
             size="50"
             required
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
@@ -84,13 +94,14 @@ export default function RegisterView() {
             value={confirmPassword}
             size="50"
             required
-            onChange={(event) => setConfirmPassword(event.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
 
         <button type="submit" className={`btn-primary ${styles.formButton}`}>
           Register
         </button>
+
         <Link to="/login">Have an account? Log-in</Link>
       </form>
     </div>

@@ -1,0 +1,44 @@
+/* src/views/MoodStatsView/MoodStatsView.module.css */
+
+.statsView {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.statsHeader {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.statsHeader h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.statsHeader p {
+  font-size: 1rem;
+  color: #777;
+}
+
+.chartSection {
+  margin-bottom: 2rem;
+}
+
+.overviewSection {
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  .statsView {
+    padding: 1rem;
+  }
+
+  .statsHeader h1 {
+    font-size: 1.5rem;
+  }
+}

@@ -14,4 +14,8 @@ public interface UserDao {
     User getUserByUsername(String username);
 
     User createUser(RegisterUserDto user);
+
+    void updateUserRole(int userId, String newRole);
+
+    void deleteUser(int userId);
 }

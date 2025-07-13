@@ -1,0 +1,18 @@
+.actionButton {
+  margin-left: 10px;
+  padding: 4px 8px;
+}
+
+.deleteButton {
+  margin-left: 10px;
+  padding: 4px 8px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.roleTag {
+  margin-left: 10px;
+  font-weight: bold;
+}

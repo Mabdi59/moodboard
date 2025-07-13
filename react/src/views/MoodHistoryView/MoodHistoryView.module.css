@@ -1,0 +1,25 @@
+/* src/views/MoodHistoryView/MoodHistoryView.module.css */
+
+.moodHistory {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.moodHistory h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333333;
+  text-align: center;
+}
+
+/* Style for when there are no entries */
+.empty {
+  text-align: center;
+  font-size: 1rem;
+  color: #888;
+  margin-top: 2rem;
+}

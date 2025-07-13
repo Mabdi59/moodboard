@@ -1,0 +1,53 @@
+/* src/components/MoodStats/MoodStats.module.css */
+
+.statsContainer {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.statList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statItem {
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.label {
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-right: 0.5rem;
+  color: #555;
+}
+
+.value {
+  font-weight: bold;
+  color: #222;
+}
+
+.bar {
+  height: 8px;
+  background-color: #4caf50;
+  margin-top: 0.25rem;
+  border-radius: 4px;
+}
+
+.total {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #777;
+}

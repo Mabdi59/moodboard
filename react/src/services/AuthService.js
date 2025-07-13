@@ -5,8 +5,7 @@ import axios from 'axios';
  * All methods return a Promise so that the calling code can handle both success and
  * error responses appropriately.
  */
-export default {
-
+const AuthService = {
   login(user) {
     return axios.post('/login', user);
   },
@@ -19,4 +18,9 @@ export default {
     return axios.get(`/users/${userId}`);
   },
 
-}
+  forgotPassword(email) {
+    return axios.post('/forgot-password', { email });
+  },
+};
+
+export default AuthService;
